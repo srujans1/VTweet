@@ -13,8 +13,8 @@
             </hgroup>
             <p>
           
-        <asp:FileUpload ID="VideoUploader" ValidateRequestMode="Enabled" runat="server"/>  <br />
-            <asp:RegularExpressionValidator ID="uplValidator" runat="server" ControlToValidate="VideoUploader"
+        <asp:FileUpload ID="VideoUploader" ValidateRequestMode="Enabled" runat="server"/>  
+        <asp:RegularExpressionValidator ID="uplValidator" runat="server" ControlToValidate="VideoUploader"
  ErrorMessage=".mp4, .mov & wmb formats are allowed" 
  ValidationExpression="(.+\.([Mm][Pp][4])|.+\.([Mm][Oo][Vv])|.+\.([Ww][Mm][Bb]))">
 

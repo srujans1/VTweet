@@ -3,48 +3,17 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <hgroup class="title">
         <h1><%: Title %>.</h1>
-        <h2>Your contact page.</h2>
+        <h2>Project created by:</h2>
     </hgroup>
 
     <section class="contact">
-        <header>
-            <h3>Phone:</h3>
-        </header>
         <p>
-            <span class="label">Main:</span>
-            <span>425.555.0100</span>
+            <span class="label">Anshul Mehra:</span>
+            <span><a href="mailto:anshul.mehra@nyu.edu">anshul.mehra@nyu.edu</a></span>
         </p>
         <p>
-            <span class="label">After Hours:</span>
-            <span>425.555.0199</span>
-        </p>
-    </section>
-
-    <section class="contact">
-        <header>
-            <h3>Email:</h3>
-        </header>
-        <p>
-            <span class="label">Support:</span>
-            <span><a href="mailto:Support@example.com">Support@example.com</a></span>
-        </p>
-        <p>
-            <span class="label">Marketing:</span>
-            <span><a href="mailto:Marketing@example.com">Marketing@example.com</a></span>
-        </p>
-        <p>
-            <span class="label">General:</span>
-            <span><a href="mailto:General@example.com">General@example.com</a></span>
-        </p>
-    </section>
-
-    <section class="contact">
-        <header>
-            <h3>Address:</h3>
-        </header>
-        <p>
-            One Microsoft Way<br />
-            Redmond, WA 98052-6399
+            <span class="label">Srujan Saggam:</span>
+            <span><a href="mailto:srujan.saggam@nyu.edu">srujan.saggam@nyu.edu</a></span>
         </p>
     </section>
 </asp:Content>

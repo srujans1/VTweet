@@ -17,9 +17,9 @@ namespace VTweet
             //    consumerKey: "your Twitter consumer key",
             //    consumerSecret: "your Twitter consumer secret");
 
-            //OpenAuth.AuthenticationClients.AddFacebook(
-            //    appId: "your Facebook app id",
-            //    appSecret: "your Facebook app secret");
+            OpenAuth.AuthenticationClients.AddFacebook(
+                appId: "697733770248233",
+                appSecret: "43905ad6d6e6cf073b8fff7ad85d6cdf");
 
             //OpenAuth.AuthenticationClients.AddMicrosoft(
             //    clientId: "your Microsoft account client id",

@@ -14,7 +14,7 @@ public partial class Account_Home : System.Web.UI.Page
 
     protected void SentBtn_Click(object sender, EventArgs e)
     {
-        Response.Redirect("sent.aspx");
+        Response.Redirect("Profile.aspx");
     }
     protected void UploadBtn_Click(object sender, EventArgs e)
     {

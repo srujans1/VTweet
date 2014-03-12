@@ -10,17 +10,18 @@
                 <h1><%: Title %>.</h1>
                 <h2>Welcome to VTweet!</h2>
             </hgroup>
-            <p>
+            
+        </div>
+    </section>
+    
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" Runat="Server">
+    <p>
           
         <asp:Button ID="UploadBtn" Text="Upload Video" OnClick="UploadBtn_Click" runat="server"   />
         <br />
          <asp:Button ID="SentBtn" Text="Sent Videos" OnClick="SentBtn_Click" runat="server"   />
 
             </p>
-        </div>
-    </section>
-    
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" Runat="Server">
 </asp:Content>
 
