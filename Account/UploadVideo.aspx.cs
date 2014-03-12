@@ -10,10 +10,12 @@ using System.IO;
 using Amazon.EC2;
 using Amazon.S3.Model;
 using Amazon.S3;
+using System.Web.Security;
+
 
 public partial class Account_UploadVideo : System.Web.UI.Page
 {
-    private string cloudFrontUrl="d480k7tdn2p6y.cloudfront.net";
+    private string cloudFrontUrl="http://d480k7tdn2p6y.cloudfront.net/";
     protected void Page_Load(object sender, EventArgs e)
     {
      
@@ -24,6 +26,7 @@ public partial class Account_UploadVideo : System.Web.UI.Page
         string filePath = Server.MapPath(VideoUploader.PostedFile.FileName);
         string existingBucketName = "ccdem";
         string keyName = "s2";
+        string fileName = UtilityFunctions.GenerateChar()+VideoUploader.PostedFile.FileName;
         IAmazonS3 client;
         using (client = Amazon.AWSClientFactory.CreateAmazonS3Client(System.Web.Configuration.WebConfigurationManager.AppSettings[0].ToString(), System.Web.Configuration.WebConfigurationManager.AppSettings[1].ToString()))
         {
@@ -36,10 +39,14 @@ public partial class Account_UploadVideo : System.Web.UI.Page
             request.InputStream = stream;
             request.BucketName = existingBucketName;
             request.CannedACL = S3CannedACL.PublicRead;
-            request.Key = keyName + "/" + VideoUploader.PostedFile.FileName;
+            request.Key = keyName + "/" + fileName;
             PutObjectResponse response = client.PutObject(request);
         }
 
-        lblPath.Text = "<br/>Successfully uploaded into S3: https://s3-us-west-2.amazonaws.com/" + existingBucketName + "/" + keyName + "/" + VideoUploader.PostedFile.FileName + "<br/> Cloudfront distribution url is "+cloudFrontUrl+"/" + keyName + "/" + VideoUploader.PostedFile.FileName;
+        string bucketUrl = "https://s3-us-west-2.amazonaws.com/" + existingBucketName + "/" + keyName + "/" + fileName;
+        cloudFrontUrl =  cloudFrontUrl+ keyName + "/" + fileName;
+        lblPath.Text = "<br/>Successfully uploaded into S3:"+bucketUrl + "<br/> Cloudfront distribution url is "+cloudFrontUrl;
+        Models.Video video = new Models.Video() { Url = cloudFrontUrl, UserID = (Guid)Membership.GetUser().ProviderUserKey };
+        DAL.DataAccessLayer.AddVideo(video);
     }
 }

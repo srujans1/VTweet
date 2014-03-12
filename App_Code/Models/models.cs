@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for Class1
 /// </summary>
-namespace VTweet.Models
+namespace Models
 {
     public class User
     {
@@ -16,8 +16,10 @@ namespace VTweet.Models
 
     public class Video
     {
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
         public string VideoID { get; set; }
+        public string Url { get; set; }
+        public string TimeStamp { get; set; }
     }
 
     public class Friend

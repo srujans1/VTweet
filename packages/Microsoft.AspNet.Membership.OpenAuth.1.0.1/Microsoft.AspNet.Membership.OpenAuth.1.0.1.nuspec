@@ -7,7 +7,6 @@
     <authors>Microsoft</authors>
     <owners>Microsoft</owners>
     <licenseUrl>http://www.microsoft.com/web/webpi/eula/WebDeveloperTools_1_eula_ENU.htm</licenseUrl>
-    <projectUrl>http://www.asp.net/</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>A series of helpers to enable using DotNetOpenAuth in an ASP.NET application that utilizes the Membership system for user management.</description>
     <language>en-US</language>
