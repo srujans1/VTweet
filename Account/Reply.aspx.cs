@@ -1,32 +1,40 @@
-﻿using System;
+﻿using Amazon.S3;
+using Amazon.S3.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Amazon.S3;
-using Amazon.S3.Transfer;
-using System.IO;
-using Amazon.EC2;
-using Amazon.S3.Model;
-using Amazon.S3;
-using System.Web.Security;
 
-
-public partial class Account_UploadVideo : System.Web.UI.Page
+public partial class Account_Reply : System.Web.UI.Page
 {
-    private string cloudFrontUrl="http://d480k7tdn2p6y.cloudfront.net/";
+    private string cloudFrontUrl = "http://d480k7tdn2p6y.cloudfront.net/";
     protected void Page_Load(object sender, EventArgs e)
     {
-     
+        string vid = Request.QueryString["vid"];
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["vid"] != null)
+            {
+                vid1.Src = DAL.DataAccessLayer.GetVideo(Request.QueryString["vid"].ToString()).Url;
+                Responser.DataSource = DAL.DataAccessLayer.GetMyVideoResponses(vid);
+                Responser.DataBind();
+            }
+
+        
+        }
+
     }
+
     protected void UploadFileButton_Click(object sender, EventArgs e)
     {
 
         string filePath = Server.MapPath(VideoUploader.PostedFile.FileName);
         string existingBucketName = "ccdem";
         string keyName = "s2";
-        string fileName = UtilityFunctions.GenerateChar()+VideoUploader.PostedFile.FileName;
+        string fileName = UtilityFunctions.GenerateChar() + VideoUploader.PostedFile.FileName;
         IAmazonS3 client;
         using (client = Amazon.AWSClientFactory.CreateAmazonS3Client(System.Web.Configuration.WebConfigurationManager.AppSettings[0].ToString(), System.Web.Configuration.WebConfigurationManager.AppSettings[1].ToString()))
         {
@@ -44,10 +52,12 @@ public partial class Account_UploadVideo : System.Web.UI.Page
         }
 
         string bucketUrl = "https://s3-us-west-2.amazonaws.com/" + existingBucketName + "/" + keyName + "/" + fileName;
-        cloudFrontUrl =  cloudFrontUrl+ keyName + "/" + fileName;
-       
-        lblPath.Text = "<br/>Successfully uploaded into S3:"+bucketUrl + "<br/> Cloudfront distribution url is "+cloudFrontUrl;
+        cloudFrontUrl = cloudFrontUrl + keyName + "/" + fileName;
+
+       // lblPath.Text = "<br/>Successfully uploaded into S3:" + bucketUrl + "<br/> Cloudfront distribution url is " + cloudFrontUrl;
         Models.Video video = new Models.Video() { Url = cloudFrontUrl };
-        DAL.DataAccessLayer.AddVideo(video, (Guid)Membership.GetUser().ProviderUserKey);
+        int newVid = DAL.DataAccessLayer.AddVideo(video, (Guid)Membership.GetUser().ProviderUserKey);
+       
+        DAL.DataAccessLayer.AddResponseVideo(Request.QueryString["vid"].ToString(),newVid.ToString());
     }
 }

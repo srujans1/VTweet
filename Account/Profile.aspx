@@ -1,18 +1,29 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Profile.aspx.cs" Inherits="Account_sent" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Profile.aspx.cs" Inherits="Account_Profile" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-       <video id="sampleMovie" width="640" height="360" preload="none" controls="controls">
-	<source src="https://s3-us-west-2.amazonaws.com/ccdem/s2/Breaking The Habit.mp4" />
-    </video>
-    </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" Runat="Server">
+
+    <section class="featured">
+        <div class="content-wrapper">
+            <asp:Repeater ID="videoRepeater" runat="server">
+        <ItemTemplate>
+
+            <p>
+                <video id="sampleMovie" width="640" height="360" preload="none" controls="controls">
+                    <source src="<%# Eval("Url") %>" />
+                </video>
+            </p>
+
+
+
+        </ItemTemplate>
+    </asp:Repeater>
+
+        </div>
+    </section>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" Runat="Server">
+</asp:Content>
+

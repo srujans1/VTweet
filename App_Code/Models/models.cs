@@ -16,7 +16,7 @@ namespace Models
 
     public class Video
     {
-        public Guid UserID { get; set; }
+       // public Guid UserID { get; set; }
         public string VideoID { get; set; }
         public string Url { get; set; }
         public string TimeStamp { get; set; }
