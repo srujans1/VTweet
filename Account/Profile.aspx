@@ -13,7 +13,9 @@
             <p>
                 <video id="sampleMovie" width="640" height="360" preload="none" controls="controls">
                     <source src="<%# Eval("Url") %>" />
-                </video>
+                </video> By <asp:Label runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
+                <br />
+                <asp:Button ID="btnViewReplies" Text="View Conversation" runat="server" CommandArgument='<%# Eval("VideoID") %>' CommandName="CmdViewReply" OnClick="MyBtnHandler" />
             </p>
 
 

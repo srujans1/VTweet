@@ -65,7 +65,7 @@ namespace DAL
                     SqlDataReader dr= command.ExecuteReader();
                     while (dr.Read())
                     {
-                        myVideos.Add(new Video() { VideoID = dr[0].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
+                        myVideos.Add(new Video() { VideoID = dr[0].ToString(),UserName=dr[1].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
                     }
                     dr.Close();
 
@@ -98,7 +98,7 @@ namespace DAL
                     SqlDataReader dr = command.ExecuteReader();
                     while (dr.Read())
                     {
-                        myVideos.Add(new Video() { VideoID = dr[0].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
+                        myVideos.Add(new Video() { VideoID = dr[0].ToString(),UserName=dr[1].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
                     }
                     dr.Close();
 

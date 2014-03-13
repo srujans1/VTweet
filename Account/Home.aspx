@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="Account_Home" %>
+﻿<%@ Page Title="Feed" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="Account_Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -9,31 +9,27 @@
                 <h1><%: Title %>.</h1>
                 <h2>Welcome to VTweet!</h2>
             </hgroup>
-
+              <asp:Button ID="UploadBtn" Text="Upload Video" OnClick="UploadBtn_Click" runat="server" />
         </div>
     </section>
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">
-    <p>
 
-        <asp:Button ID="UploadBtn" Text="Upload Video" OnClick="UploadBtn_Click" runat="server" />
-    </p>
-    <p>
-        <asp:Button ID="SentBtn" Text="Sent Videos" OnClick="SentBtn_Click" runat="server" />
 
-    </p>
+      
+
 
 
     <asp:Repeater ID="Repeater1" runat="server">
         <ItemTemplate>
 
             <p>
-                <video id="sampleMovie" width="640" height="360" preload="none" controls="controls">
+                <video id="sampleMovie" width="400" height="250" preload="none" controls="controls">
                     <source src="<%# Eval("Url") %>" />
-                </video>
+                </video> By <asp:Label runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
                <br />
-               <asp:Button ID="Button1" runat="server" Text="Reply" CommandArgument='<%# Eval("VideoID") %>' CommandName="ThisBtnClick" OnClick="MyBtnHandler" />
+               <asp:Button ID="Button1" runat="server" Text="View Conversation" CommandArgument='<%# Eval("VideoID") %>' CommandName="ThisBtnClick" OnClick="MyBtnHandler" />
  
             </p>
             
@@ -42,7 +38,7 @@
         </ItemTemplate>
     </asp:Repeater>
 
-
+    
 
 
 

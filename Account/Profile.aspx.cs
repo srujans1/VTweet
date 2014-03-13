@@ -18,4 +18,10 @@ public partial class Account_Profile : System.Web.UI.Page
 
         }
     }
+
+    protected void MyBtnHandler(Object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        Response.Redirect("Reply.aspx?vid=" + btn.CommandArgument.ToString());
+    }
 }
