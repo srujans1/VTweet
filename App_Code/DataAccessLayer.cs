@@ -80,6 +80,39 @@ namespace DAL
 
         }
 
+        public static IEnumerable<Video> GetFriendVideos(Guid UserId)
+        {
+            string queryString = "ListFriendVideos";
+            List<Video> myVideos = new List<Video>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier, 25);
+
+                command.Parameters["@UserID"].Value = UserId;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader dr = command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        myVideos.Add(new Video() { VideoID = dr[0].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
+                    }
+                    dr.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+            }
+            return myVideos;
+
+        }
+
         public static Video GetVideo(string videoID)
         {
             string queryString = "select * from video where VideoID = '"+videoID+"'";
@@ -110,6 +143,38 @@ namespace DAL
 
         }
 
+        public static IEnumerable<Models.User> GetFriends(Guid userId, string queryString)
+        {
+            
+            List< Models.User> userList= new List<Models.User>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@UserID", SqlDbType.UniqueIdentifier));
+                command.Parameters["@UserID"].Value=userId;
+               
+                try
+                {
+                    connection.Open();
+                    SqlDataReader dr= command.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        userList.Add(new Models.User() { UserID = dr["UserID"].ToString(), UserName = dr["UserName"].ToString() });
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+            }
+            return userList;
+
+        }
+
+        
 
         public static IEnumerable<Video> GetMyVideoResponses(string  vid)
         {
@@ -169,6 +234,66 @@ namespace DAL
 
             }
             return true;
+
+        }
+
+        public static void UnFollowUser(Guid userID, Guid FriendUserID)
+        {
+           
+            string queryString = "Unfollow";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier);
+                command.Parameters.Add("@FriendUserID", SqlDbType.UniqueIdentifier);
+
+
+                command.Parameters["@UserID"].Value = userID;
+                command.Parameters["@FriendUserID"].Value = FriendUserID;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                 
+
+                }
+                catch (Exception ex)
+                {
+                    return;
+                }
+
+            }
+         
+        }
+
+        public static void FollowUser(Guid userID, Guid FriendUserID)
+        {
+
+            string queryString = "Follow";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.Add("@UserID", SqlDbType.UniqueIdentifier);
+                command.Parameters.Add("@FriendUserID", SqlDbType.UniqueIdentifier);
+
+
+                command.Parameters["@UserID"].Value = userID;
+                command.Parameters["@FriendUserID"].Value = FriendUserID;
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+
+
+                }
+                catch (Exception ex)
+                {
+                    return;
+                }
+
+            }
 
         }
     }

@@ -14,7 +14,7 @@ public partial class Account_Home : System.Web.UI.Page
         if (!IsPostBack)
         {
 
-            Repeater1.DataSource = DAL.DataAccessLayer.GetMyVideos((Guid)Membership.GetUser().ProviderUserKey);
+            Repeater1.DataSource = DAL.DataAccessLayer.GetFriendVideos((Guid)Membership.GetUser().ProviderUserKey);
             Repeater1.DataBind();
         
         }
