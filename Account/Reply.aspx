@@ -5,45 +5,51 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="Server">
     <section class="featured">
         <div class="content-wrapper">
-            <video id="vid1" runat="server" width="640" height="360" preload="none" controls="controls">
+            <video id="vid1" runat="server" width="640" height="360" preload="metadata" controls="controls">
             </video>
 
         </div>
     </section>
-   
+
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="Server">
-     <p style="text-align:center">
-            <asp:Repeater ID="Responser" runat="server">
-        <ItemTemplate>
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <p style="text-align: center">
+                <asp:Repeater ID="Responser" runat="server">
+                    <ItemTemplate>
 
-            <p>
-                <video id="sampleMovie" width="300" height="200" preload="none" controls="controls">
-                    <source src="<%# Eval("Url") %>" />
-                </video>
-                <br />
+                        <p>
+                            <video id="sampleMovie" preload="metadata" controls="controls">
+                                <source src="<%# Eval("Url") %>" />
+                            </video>
+                            <br /> - By <asp:Label Text='<%# Eval("UserName") %>' runat="server"></asp:Label>
+                            <br />
 
-            </p>
+                        </p>
 
 
 
-        </ItemTemplate>
-    </asp:Repeater>
-   
-   </p>
-     <p style="text-align:center">
+                    </ItemTemplate>
+                </asp:Repeater>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
-        <asp:FileUpload ID="VideoUploader" ValidateRequestMode="Enabled" runat="server" />
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="VideoUploader"
-            ErrorMessage=".mp4, .mov & wmb formats are allowed"
-            ValidationExpression="(.+\.([Mm][Pp][4])|.+\.([Mm][Oo][Vv])|.+\.([Ww][Mm][Bb]))">
+         <p style="text-align: center">
 
-        </asp:RegularExpressionValidator>
+         <asp:FileUpload ID="VideoUploader" ValidateRequestMode="Enabled" runat="server" />
+         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="VideoUploader"
+             ErrorMessage=".mp4, .mov & wmb formats are allowed"
+             ValidationExpression="(.+\.([Mm][Pp][4])|.+\.([Mm][Oo][Vv])|.+\.([Ww][Mm][Bb]))">
+
+         </asp:RegularExpressionValidator>
          <br />
-        <asp:Button runat="server" ID="Button1" Text="Upload" OnClick="UploadFileButton_Click" />
-        <br />
+         <asp:Button runat="server" ID="Button1" Text="Upload" CausesValidation="false" UseSubmitBehavior="false" OnClick="UploadFileButton_Click" />
+         <br />
 
-    </p>
+     </p>
+
+
 </asp:Content>
 

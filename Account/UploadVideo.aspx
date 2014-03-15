@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="UploadVideo.aspx.cs" Inherits="Account_UploadVideo" %>
+﻿<%@ Page Title="Upload Video" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.master" CodeFile="UploadVideo.aspx.cs" Inherits="Account_UploadVideo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 
@@ -22,7 +22,7 @@
         <asp:Button runat="server" ID="UploadFileButton" Text="Upload" OnClick="UploadFileButton_Click"/>
         <br />
 
-       <asp:Label ID="lblPath" runat="server"></asp:Label>
+      
             </p>
         </div>
     </section>

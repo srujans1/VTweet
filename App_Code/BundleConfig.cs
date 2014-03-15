@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 
-namespace VTweet
+namespace vTweet1._1
 {
     public class BundleConfig
     {

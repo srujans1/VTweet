@@ -11,7 +11,7 @@
         <ItemTemplate>
 
             <p>
-                <video id="sampleMovie" width="640" height="360" preload="none" controls="controls">
+                <video id="sampleMovie" width="640" height="360" preload="metadata" controls="controls">
                     <source src="<%# Eval("Url") %>" />
                 </video> By <asp:Label runat="server" Text='<%# Eval("UserName") %>'></asp:Label>
                 <br />

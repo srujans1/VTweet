@@ -47,10 +47,9 @@
                             <nav>
                                 <ul id="menu">
                                     <li><a runat="server" href="~/Account/Home.aspx">VTweet</a></li>
-                                    <li><a runat="server" href="~/Account/Home.aspx">Home</a></li>
+                                    <li><a runat="server" href="~/Account/Home.aspx">Feed</a></li>
                                     <li><a runat="server" href="~/Account/Profile.aspx">Profile</a></li>
                                     <li><a runat="server" href="~/Account/Users.aspx">Users</a></li>
-                                    <li><a runat="server" href="~/Account/Friends.aspx">Friends</a></li>
 
                                 </ul>
                             </nav>

@@ -6,7 +6,7 @@ using Microsoft.AspNet.Membership.OpenAuth;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 
-namespace VTweet
+namespace vTweet1._1
 {
     public static class RouteConfig
     {

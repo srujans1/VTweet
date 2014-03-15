@@ -13,19 +13,25 @@ public partial class Account_Reply : System.Web.UI.Page
     private string cloudFrontUrl = "http://d480k7tdn2p6y.cloudfront.net/";
     protected void Page_Load(object sender, EventArgs e)
     {
-        string vid = Request.QueryString["vid"];
+        
         if (!IsPostBack)
         {
-            if (Request.QueryString["vid"] != null)
-            {
-                vid1.Src = DAL.DataAccessLayer.GetVideo(Request.QueryString["vid"].ToString()).Url;
-                Responser.DataSource = DAL.DataAccessLayer.GetMyVideoResponses(vid);
-                Responser.DataBind();
-            }
+            RefreshPage();
 
         
         }
 
+    }
+
+    private void RefreshPage()
+    {
+        if (Request.QueryString["vid"] != null)
+        {
+            string vid = Request.QueryString["vid"];
+            vid1.Src = DAL.DataAccessLayer.GetVideo(vid).Url;
+            Responser.DataSource = DAL.DataAccessLayer.GetMyVideoResponses(vid);
+            Responser.DataBind();
+        }
     }
 
     protected void UploadFileButton_Click(object sender, EventArgs e)
@@ -57,7 +63,9 @@ public partial class Account_Reply : System.Web.UI.Page
        // lblPath.Text = "<br/>Successfully uploaded into S3:" + bucketUrl + "<br/> Cloudfront distribution url is " + cloudFrontUrl;
         Models.Video video = new Models.Video() { Url = cloudFrontUrl };
         int newVid = DAL.DataAccessLayer.AddVideo(video, (Guid)Membership.GetUser().ProviderUserKey);
-       
-        DAL.DataAccessLayer.AddResponseVideo(Request.QueryString["vid"].ToString(),newVid.ToString());
+        string vid=Request.QueryString["vid"].ToString();
+        if(!vid.Equals(""))
+            DAL.DataAccessLayer.AddResponseVideo(vid,newVid.ToString());
+        RefreshPage();
     }
 }

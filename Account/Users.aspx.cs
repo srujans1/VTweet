@@ -12,11 +12,17 @@ public partial class Account_Users : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            FriendsList.DataSource = DAL.DataAccessLayer.GetFriends((Guid)Membership.GetUser().ProviderUserKey, "ListFriends");
-            FriendsList.DataBind();
-            NonFriendsList.DataSource = DAL.DataAccessLayer.GetFriends((Guid)Membership.GetUser().ProviderUserKey, "ListNonFriends");
-            NonFriendsList.DataBind();
+            RefreshDataSource();
         }
+        
+    }
+
+    private void RefreshDataSource()
+    {
+        FriendsList.DataSource = DAL.DataAccessLayer.GetFriends((Guid)Membership.GetUser().ProviderUserKey, "ListFriends");
+        FriendsList.DataBind();
+        NonFriendsList.DataSource = DAL.DataAccessLayer.GetFriends((Guid)Membership.GetUser().ProviderUserKey, "ListNonFriends");
+        NonFriendsList.DataBind();
     }
     protected void MyBtnHandler(Object sender, EventArgs e)
     {
@@ -31,6 +37,8 @@ public partial class Account_Users : System.Web.UI.Page
             DAL.DataAccessLayer.UnFollowUser((Guid)Membership.GetUser().ProviderUserKey, new Guid(btn.CommandArgument));
 
         }
+
+        RefreshDataSource();
         
     }
 }

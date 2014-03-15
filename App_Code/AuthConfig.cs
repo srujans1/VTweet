@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Membership.OpenAuth;
 
-namespace VTweet
+namespace vTweet1._1
 {
     public static class AuthConfig
     {
