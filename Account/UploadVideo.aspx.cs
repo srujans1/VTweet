@@ -49,7 +49,7 @@ public partial class Account_UploadVideo : System.Web.UI.Page
 
         string bucketUrl = "https://s3-us-west-2.amazonaws.com/" + existingBucketName + "/" + keyName + "/" + fileName;
         cloudFrontUrl =  cloudFrontUrl+ keyName + "/" + fileName;
-       
+        TranscoderUtility.Transcode(keyName + "/" + fileName, keyName + "/mob_" + fileName, existingBucketName);
         //lblPath.Text = "<br/>Successfully uploaded into S3:"+bucketUrl + "<br/> Cloudfront distribution url is "+cloudFrontUrl;
         Models.Video video = new Models.Video() { Url = cloudFrontUrl };
         DAL.DataAccessLayer.AddVideo(video, (Guid)Membership.GetUser().ProviderUserKey);

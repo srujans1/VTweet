@@ -65,7 +65,8 @@ namespace DAL
                     SqlDataReader dr= command.ExecuteReader();
                     while (dr.Read())
                     {
-                        myVideos.Add(new Video() { VideoID = dr[0].ToString(),UserName=dr[1].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
+                        string url = UtilityFunctions.transcodeUrl(dr[2].ToString());
+                        myVideos.Add(new Video() { VideoID = dr[0].ToString(),UserName=dr[1].ToString(), Url = url, TimeStamp = dr[3].ToString() });
                     }
                     dr.Close();
 
@@ -79,6 +80,8 @@ namespace DAL
             return myVideos;
 
         }
+
+      
 
         public static IEnumerable<Video> GetFriendVideos(Guid UserId)
         {
@@ -98,7 +101,8 @@ namespace DAL
                     SqlDataReader dr = command.ExecuteReader();
                     while (dr.Read())
                     {
-                        myVideos.Add(new Video() { VideoID = dr[0].ToString(),UserName=dr[1].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
+                        string url = UtilityFunctions.transcodeUrl(dr[2].ToString());
+                        myVideos.Add(new Video() { VideoID = dr[0].ToString(),UserName=dr[1].ToString(), Url = url, TimeStamp = dr[3].ToString() });
                     }
                     dr.Close();
 
@@ -128,7 +132,7 @@ namespace DAL
                     if (dr.Read())
                     {
                         myVideo.VideoID = dr[0].ToString();
-                        myVideo.Url = dr[2].ToString();
+                        myVideo.Url = UtilityFunctions.transcodeUrl(dr[2].ToString());
                     }
                     dr.Close();
 
@@ -192,7 +196,8 @@ namespace DAL
                     SqlDataReader dr = command.ExecuteReader();
                     while (dr.Read())
                     {
-                        myVideos.Add(new Video() { VideoID = dr[0].ToString(), Url = dr[2].ToString(), TimeStamp = dr[3].ToString() });
+                        string url = UtilityFunctions.transcodeUrl(dr[2].ToString());
+                        myVideos.Add(new Video() { VideoID = dr[0].ToString(), Url = url, TimeStamp = dr[3].ToString() });
                     }
                     dr.Close();
 
