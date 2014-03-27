@@ -39,7 +39,7 @@ public partial class Account_Reply : System.Web.UI.Page
 
         string filePath = Server.MapPath(VideoUploader.PostedFile.FileName);
         string existingBucketName = "ccdem";
-        string keyName = "s2";
+        string keyName = Membership.GetUser().ProviderUserKey.GetHashCode().ToString(); 
         string fileName = UtilityFunctions.GenerateChar() + VideoUploader.PostedFile.FileName;
         IAmazonS3 client;
         using (client = Amazon.AWSClientFactory.CreateAmazonS3Client(System.Web.Configuration.WebConfigurationManager.AppSettings[0].ToString(), System.Web.Configuration.WebConfigurationManager.AppSettings[1].ToString()))
@@ -59,7 +59,7 @@ public partial class Account_Reply : System.Web.UI.Page
 
         string bucketUrl = "https://s3-us-west-2.amazonaws.com/" + existingBucketName + "/" + keyName + "/" + fileName;
         cloudFrontUrl = cloudFrontUrl + keyName + "/" + fileName;
-
+        TranscoderUtility.Transcode(keyName + "/" + fileName, keyName + "/mob_" + fileName, existingBucketName);
        // lblPath.Text = "<br/>Successfully uploaded into S3:" + bucketUrl + "<br/> Cloudfront distribution url is " + cloudFrontUrl;
         Models.Video video = new Models.Video() { Url = cloudFrontUrl };
         int newVid = DAL.DataAccessLayer.AddVideo(video, (Guid)Membership.GetUser().ProviderUserKey);
@@ -67,5 +67,7 @@ public partial class Account_Reply : System.Web.UI.Page
         if(!vid.Equals(""))
             DAL.DataAccessLayer.AddResponseVideo(vid,newVid.ToString());
         RefreshPage();
+
+        
     }
 }

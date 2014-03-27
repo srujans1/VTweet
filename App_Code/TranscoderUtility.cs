@@ -149,36 +149,7 @@ using Amazon.SimpleNotificationService.Model;
             return role;
         }
 
-        /// <summary>
-        /// Create the Amazon S3 bucket where the input file will be uploaded to and the transcoded output file will be put in.
-        /// </summary>
-        /// <returns></returns>
-        //static string CreateBucket()
-        //{
-        //    var bucketName = "transcoder" + UNIQUE_POSTFIX;
-        //    var s3Client = new AmazonS3Client();
-        //    s3Client.PutBucket(new PutBucketRequest
-        //    {
-        //        BucketName = bucketName,
-        //        UseClientRegion = true
-        //    });
-
-        //    return bucketName;
-        //}
-
-        ///// <summary>
-        ///// Upload the video to the Amazon S3 bucket.
-        ///// </summary>
-        ///// <param name="bucket"></param>
-        ///// <param name="filePath"></param>
-        ///// <param name="s3Key"></param>
-        //static void UploadVideo(string bucket, string filePath, string s3Key)
-        //{
-        //    var s3Client = new AmazonS3Client();
-        //    var utility = new TransferUtility(s3Client);
-
-        //    utility.Upload(filePath, bucket, s3Key);
-        //}
+        
     }
 
 
